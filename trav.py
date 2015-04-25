@@ -1,11 +1,16 @@
 import sqlite3
+import os
 from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash
 from contextlib import closing
+from werkzeug import secure_filename
 
 DATABASE = 'trav.db'
 DEBUG = True
 SECRET_KEY = 'development key'
+UPLOAD_FOLDER = '/home/shubhodeep/TravelSafe/static/'
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'svg'])
+
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -36,6 +41,12 @@ def landing():
         return redirect(url_for('homepage'))
     return render_template('landing.html')
 
+@app.route('/home')
+def homepage():
+    if not session.get('id'):
+        return redirect(url_for('landing'))
+    return render_template('home.html')
+
 @app.route('/login', methods = ['GET','POST'])
 def login():
     error = None
@@ -46,6 +57,26 @@ def login():
         else:
             session['id'] = request.form['pn']
             return redirect(url_for('homepage'))
+    return error
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+@app.route('/upload', methods = ['GET', 'POST'])
+def upload():
+    error = None
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return render_template('home.html', filename = filename)
+        else:
+            error = "Sorry something wrong happened"
+    return error
+
 
 @app.route('/register', methods = ['GET', 'POST'])
 def register():
@@ -59,6 +90,31 @@ def register():
             g.db.execute('insert into friends (p_num,f_num) values (?,?)',[request.form['pn'],request.form['fn']])
             g.db.commit()
             return redirect(url_for('landing'))
+    return error
+
+@app.route('/add_friend', methods = ['GET', 'POST'])
+def add_friend():
+    error = None
+    if request.method == 'POST':
+        friend = g.db.execute('select * from friends where p_num = ? and f_num = ?',[session.get('id'),request.form['fn']])
+        if len(friend.fetchall())>0:
+            error = 'Friend already added'
+        else:
+            g.db.execute('insert into friends (p_num,f_num) values (?,?)',[session.get('id'),request.form['fn']])
+            g.db.commit()
+            return redirect(url_for('homepage'))
+    return error
+
+@app.route('/pass', methods = ['GET', 'POST'])
+def password():
+    error = None
+    if request.method == 'POST':
+        if request.form['pw'] == request.form['cpw']:
+            g.db.execute('update users set password = ? where p_num = ?',[request.form['pw'],session.get('id')])
+            g.db.commit()
+            return redirect(url_for('homepage'))
+        else:
+            error = 'Passwords do not match'
     return error
 
 
