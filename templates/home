@@ -1,0 +1,137 @@
+<html>
+<head>
+<title>
+page2
+</title>
+</head>
+<link rel="stylesheet" href="css/materialize.min.css">
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/materialize.min.js"></script>
+<body>
+<div class="row">
+<div class="col s2">
+  <ul id="slide-out" class="row side-nav fixed">
+    <li class="bold"><a class="waves-effect waves-teal modal-trigger" href="#addfriend">Add a friend</a></li>
+    <li class="bold"><a class="waves-effect waves-teal modal-trigger" href="#change">Change Password</a></li>
+	<li class="bold"><a class="waves-effect waves-teal modal-trigger" href="#reset">Reset Account</a></li>
+  </ul>
+  </div>
+  <div class="col s10 offset-s2">
+    <div class="row">
+    <div class="col s12">
+      <ul class="tabs">
+        <li class="tab col s3"><a class="active" href="#scan">Upload QR Code</a></li>
+        <li class="tab col s3"><a href="#sos">Send SOS Message</a></li>
+      </ul>
+    </div>
+    <div id="scan" class="col s12">
+	<div class="center" style="margin-top:5%">
+	<h3 class="header light red-text darken-1">Upload QR Code</h3>
+	</div>
+	  <form action="#" style="margin-top:6%" class="col s8 offset-s2">
+	<div class="file-field input-field">
+      <input class="file-path validate" type="text"/>
+      <div class="btn">
+        <span>File</span>
+        <input type="file" />
+      </div>
+    </div>
+  </form>
+	</div>
+    <div id="sos" class="col s12">
+	
+	<div class="center" style="margin-top:5%">
+	<h3 class="header light red-text darken-1">Send SOS Message</h3>
+	</div>
+	<div class="row">
+	<div class="center" style="margin-top:5%">
+	<img src="RedButton.png">
+	</div>
+	</div>
+	</div>
+	</div>
+  </div>
+  </div>
+  <script>
+  $(document).ready(function(){
+    $('ul.tabs').tabs();
+  });
+  </script>
+  <div id="addfriend" class="modal">
+    <div class="modal-content">
+      <div class="center">
+	  <h3>Add Friend</h3>
+	  </div>
+      <div class="row">
+<div class="input-field col s10 offset-s1">
+<input type="text" id="fn" name="fn" class="validate" >
+<label for="fn">Friend's Phone Number</label>
+</div>
+<div class="row">
+<br>
+<button class="btn red darken-1 large waves-effect waves-light col offset-s1" style="margin-top:3%" type="submit" name="action">Submit
+    <i class="mdi-content-send right"></i>
+  </button>
+</div>
+      </div>
+    </div>
+   
+  </div>
+    <div id="change" class="modal">
+    <div class="modal-content">
+      <div class="center">
+	  <h3>Change Password</h3>
+	  </div>
+      <div class="row">
+<div class="input-field col s10 offset-s1">
+<input type="text" id="pw" name="pw" class="validate" >
+<label for="pw">New Password</label>
+</div>
+<div class="input-field col s10 offset-s1">
+<input type="text" id="cpw" name="cpw" class="validate" >
+<label for="cpw">Confirm Password</label>
+</div>
+<button class="btn red darken-1 large waves-effect waves-light col offset-s1" style="margin-top:3%" type="submit" name="action">Submit
+    <i class="mdi-content-send right"></i>
+  </button>
+</div>
+      </div>
+    </div>
+   
+  </div>
+    <div id="reset" class="modal">
+    <div class="modal-content">
+      <div class="center">
+	  <h3>Reset Account</h3>
+	  </div>
+      <div class="row">
+<div class="input-field col s10 offset-s1">
+<input type="text" id="pn" name="pn" class="validate" >
+<label for="pn">Your Phone Number</label>
+</div>
+<div class="input-field col s10 offset-s1">
+<input type="text" id="fn" name="fn" class="validate" >
+<label for="fn">Friend's Phone Number</label>
+</div>
+<div class="input-field col s10 offset-s1">
+<input type="password" id="pw" name="pw" class="validate" >
+<label for="pw">Common Password</label>
+</div>
+<div class="row">
+<br>
+<button class="btn red darken-1 large waves-effect waves-light col offset-s1" style="margin-top:3%" type="submit" name="action">Submit
+    <i class="mdi-content-send right"></i>
+  </button>
+</div>
+      </div>
+    </div>
+   
+  </div>
+        
+  <script>
+  $(document).ready(function(){
+    $('.modal-trigger').leanModal();
+  });
+</script>
+</body>
+</html>
