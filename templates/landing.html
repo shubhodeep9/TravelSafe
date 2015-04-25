@@ -1,91 +1,82 @@
 <html>
 <head>
-<--! <head title ="Signup Form"> -->
 <title>
-Signup Form
+Travel Safe
 </title>
 </head>
 <link rel="stylesheet" href="css/materialize.min.css">
 <script src="js/jquery-2.1.1.min.js"></script>
 <script src="js/materialize.min.js"></script>
-
 <body>
-<div class="container" style="margin-top:5%">
+<a class="waves-effect right top waves-blue btn-flat modal-trigger" style="margin-top:-5%" href="#modal1">New User</a>
+<div class="container" style="margin-top:6%">
 <div class="row">
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red">
+      <i class="large mdi-navigation-expand-more"></i>
+    </a>
+    
+  </div>
 <div class="col s12">
 <div class="card blue darken-4 z-depth-0">
 <div class="card-content white-text">
 <div class="row">
 <div class="center">
-<p><h5>Sign Up<h5></p>
+<p><h1>Login </h1></p>
 </div>
 </div>
 <div class="row">
-<form class="col s12">
+<form class="col s12" autocomplete="off">
 <div class="row">
-<div class="input-field col s12 l6">
-<i class="large prefix mdi-action-account-circle"></i>
-<input type="text" id="fn" class="validate">
-<label for="fn">First Name</label>
+<div class="input-field col s10 offset-s1">
+<input type="text" id="pn" name="pn" class="validate" >
+<label for="pn">Enter Phone Number</label>
 </div>
-<div class="input-field col s12 l6">
-<i class="large prefix mdi-action-account-circle"></i>
-<input type="text" id="ln" class="validate">
-<label for="ln">Last Name</label>
+<div class="input-field col s10 offset-s1">
+<input type="password" id="pw" name="pw" class="validate" >
+<label for="pw">Enter Password</label>
 </div>
-</div>
+</div><br>
 <div class="row">
-<div class="input-field col s12 l12">
-<i class="large prefix mdi-communication-email"></i>
-<input type="text" id="email" class="validate">
-<label for="email">Email</label>
+<button class="btn red darken-1 large waves-effect waves-light col s2 offset-s5" type="submit" name="action">Submit
+    <i class="mdi-content-send right"></i>
+  </button>
 </div>
-</div>
-<div class="row">
-<div class="input-field col s12 l12">
-<i class="large prefix mdi-communication-vpn-key"></i>
-<input type="password" id="pwd" class="validate">
-<label for="pwd">Password</label>
-</div>
-</div>
-<div class="row">
-<div class="input-field col s12 l12">
-<i class="large prefix mdi-social-cake"></i>
-<input type="date" class="datepicker" id="bday">
-</div>
-</div>
-<script>
-$('.datepicker').pickadate({
-selectMonths: true,
-selectYears: 15
-});
-</script>
-<div class="row">
-<div class="input-field col s12 l6">
-<i class="large prefix mdi-social-group"></i>
-<input type="radio" name="sex" id="male">
-<label for="male">Male</label>
-</div>
-<div class="input-field col s12 l6">
-<i class="large prefix mdi-social-group"></i>
-<input type="radio" name="sex" id="female">
-<label for="female">Female</label>
-</div>
-</div>
-
-</div>
-
-<button class="btn wave-effect wave-light red lighten-1" type="submit">Submit
-<i class="mdi-content-send right"></i>
-</button>
 </form>
 </div>
+</div></div></div></div></div>
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <div class="center">
+	  <h3>New User</h3>
+	  </div>
+      <div class="row">
+<div class="input-field col s10 offset-s1">
+<input type="text" id="pn" name="pn" class="validate" >
+<label for="pn">Your Phone Number</label>
+</div>
+<div class="input-field col s10 offset-s1">
+<input type="text" id="fn" name="fn" class="validate" >
+<label for="fn">Friend's Phone Number</label>
+</div>
+<div class="input-field col s10 offset-s1">
+<input type="password" id="pw" name="pw" class="validate" >
+<label for="pw">Common Password</label>
+</div>
+<div class="row">
+<br>
+<button class="btn red darken-1 large waves-effect waves-light col offset-s1" style="margin-top:3%" type="submit" name="action">Submit
+    <i class="mdi-content-send right"></i>
+  </button>
 </div>
 </div>
-</div>
-</div>
-
+    </div>
+  </div>
+  <script>
+  $(document).ready(function(){
+    $('.modal-trigger').leanModal();
+  });
+</script>
 
 </body>
-
 </html>
