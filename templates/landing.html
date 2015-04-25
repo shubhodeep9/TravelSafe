@@ -26,7 +26,7 @@ Travel Safe
 </div>
 </div>
 <div class="row">
-<form class="col s12" autocomplete="off">
+<form class="col s12" method="post" action="{{ url_for('login') }}" autocomplete="off">
 <div class="row">
 <div class="input-field col s10 offset-s1">
 <input type="text" id="pn" name="pn" class="validate" >
@@ -51,6 +51,7 @@ Travel Safe
 	  <h3>New User</h3>
 	  </div>
       <div class="row">
+        <form action="{{ url_for('register') }}" method="post">
 <div class="input-field col s10 offset-s1">
 <input type="text" id="pn" name="pn" class="validate" >
 <label for="pn">Your Phone Number</label>
@@ -69,6 +70,7 @@ Travel Safe
     <i class="mdi-content-send right"></i>
   </button>
 </div>
+</form>
 </div>
     </div>
   </div>
