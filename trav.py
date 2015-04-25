@@ -115,9 +115,7 @@ def password():
             return redirect(url_for('homepage'))
         else:
             error = 'Passwords do not match'
-    return error
-
-
+    return error    
 
 if __name__ == '__main__':
     app.run()
