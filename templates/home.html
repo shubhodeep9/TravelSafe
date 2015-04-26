@@ -1,67 +1,66 @@
 <html>
 <head>
-  <title>
-    Home
-  </title>
+<title>
+Home
+</title>
 </head>
-<link rel="stylesheet" href="{{ 'static/css/materialize.min.css' }}">
-<script src="{{ 'static/js/jquery-2.1.1.min.js' }}"></script>
-<script src="{{ 'static/js/materialize.min.js' }}"></script>
-<body>
-  <div class="row">
-    <div class="col s2">
-      <ul id="slide-out" class="row side-nav fixed">
-        <li class="bold"><a class="waves-effect waves-teal modal-trigger" href="#addfriend">Add a friend</a></li>
-        <li class="bold"><a class="waves-effect waves-teal modal-trigger" href="#change">Change Password</a></li>
-        <li class="bold"><a class="waves-effect waves-teal modal-trigger" href="#reset">Reset Account</a></li>
+<link rel="stylesheet" href="css/materialize.min.css">
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/materialize.min.js"></script>
+<body background="bg1.jpg">
+
+<div class="row" style="margin-top:2%">
+
+<div class="col s2">
+  <ul id="slide-out" class="row side-nav fixed yellow accent-4">
+    <div class="row"><li class="bold"><a href="#addfriend" class="waves-effect waves-red modal-trigger col s12 " style="margin-top:25%"><h5>Add a Friend</h5></a></li></div>
+    <div class="row"><li class="bold"><a class="waves-effect waves-red modal-trigger col s12 " href="#friends" style="margin-top:5%"><h5>View Friends</h5></a></li></div>
+    <div class="row"><li class="bold"><a class="waves-effect waves-red modal-trigger col s12 " href="#change" style="margin-top:5%"><h5>Change Password</h5></a></li></div>
+	<div class="row"><li class="bold"><a class="waves-effect waves-red col s12 " href="#" style="margin-top:5%"><h5>Logout</h5></a></li></div>
+  </ul>
+  </div>
+  <script>$(".button-collapse").sideNav();</script>
+  <div class="col s10 offset-s2">
+  <div class="center" style="margin-top:-2%">
+  <img src="TRAVELSAFE.png">
+  </div>
+    <div class="row" style="margin-top:2%">
+    <div class="col s12">
+      <ul class="tabs ">
+        <li class="tab col s3 yellow accent-4 z-depth-1"><a class="active black-text" href="#scan">Upload QR Code</a></li>
+        <li class="tab col s3 yellow accent-4 z-depth-1"><a class="black-text" href="#sos">Send SOS Message</a></li>
       </ul>
     </div>
-    <div class="col s10 offset-s2">
-      <div class="row">
-        <div class="col s12">
-          <ul class="tabs">
-            <li class="tab col s3"><a class="active" href="#scan">Upload QR Code</a></li>
-            <li class="tab col s3"><a href="#sos">Send SOS Message</a></li>
-          </ul>
-        </div>
-        <div id="scan" class="col s12">
-          <div class="center" style="margin-top:5%">
-            <h3 class="header light red-text darken-1">Upload QR Code</h3>
-          </div>
-          <form action="{{ url_for('upload') }}" style="margin-top:3%" method="post" enctype=multipart/form-data class="col s8 offset-s2">
-            <div class="file-field input-field">
-              <div class="row">  <input class="file-path validate" type="text"/>
-
-                <div class="btn">
-                  <span>File</span>
-                  <input type="file" name="file" required/>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <button class="btn red darken-1 large waves-effect waves-light right" type="submit" name="action">Submit
-                <i class="mdi-content-send right"></i>
-              </button>
-            </div>
-
-          </form>
-          {% if filename %}
-          <img src="{{ url_for('static', filename = filename) }}">
-          {% endif %}
-        </div>
-        <div id="sos" class="col s12">
-
-          <div class="center" style="margin-top:5%">
-            <h3 class="header light red-text darken-1">Send SOS Message</h3>
-          </div>
-          <div class="row">
-            <div class="center" style="margin-top:5%">
-              <img src="RedButton.png">
-            </div>
-          </div>
-        </div>
+    <div id="scan" class="col s12">
+	<div class="center" style="margin-top:2%">
+	<h3 class="header light black-text darken-1">Upload QR Code</h3>
+	</div>
+	  <form action="#" style="margin-top:0%" class="col s6 offset-s2">
+	<div class="file-field input-field">
+      <input class="file-path validate " type="text"/>
+      <div class="btn red white-text">
+        <span>File</span>
+        <input type="file" />
       </div>
     </div>
+  </form>
+<button class="btn red darken-1 large waves-effect waves-light " style="margin-top:2%" type="submit" name="action">Submit
+    <i class="mdi-content-send right"></i>
+  </button>
+
+	</div>
+    <div id="sos" class="col s12">
+	
+	<div class="center" style="margin-top:2%">
+	<h3 class="header light black-text darken-1">Send SOS Message</h3>
+	</div>
+	<div class="row">
+	<div class="center">
+	<a class="btn-floating btn-large waves-effect waves-light red"><i class="mdi-action-settings-remote"></i></a>
+	</div></div>
+	</div>
+	</div>
+  </div>
   </div>
   <script>
   $(document).ready(function(){
@@ -71,83 +70,58 @@
   <div id="addfriend" class="modal">
     <div class="modal-content">
       <div class="center">
-        <h3 class="header light">Add Friend</h3>
-      </div>
+	  <h3>Add Friend</h3>
+	  </div>
       <div class="row">
-        <form action="{{ url_for('add_friend') }}" method="post">
-        <div class="input-field col s10 offset-s1">
-          <input type="text" id="fn" name="fn" class="validate" >
-          <label for="fn">Friend's Phone Number</label>
-        </div>
-        <br>
-        <div class="row">
-
-          <button class="btn red darken-1 large waves-effect waves-light col offset-s1" style="margin-top:3%" type="submit" name="action">Submit
-            <i class="mdi-content-send right"></i>
-          </button>
-        </div>
-      </form>
+<div class="input-field col s10 offset-s1">
+<input type="text" id="fn" name="fn" class="validate" >
+<label for="fn">Friend's Phone Number</label>
+</div>
+<div class="row">
+<br>
+<button class="btn red darken-1 large waves-effect waves-light col offset-s1" style="margin-top:3%" type="submit" name="action">Submit
+    <i class="mdi-content-send right"></i>
+  </button>
+</div>
       </div>
     </div>
-
+   
   </div>
-  <div id="change" class="modal">
+    <div id="change" class="modal">
     <div class="modal-content">
       <div class="center">
-        <h3>Change Password</h3>
-      </div>
+	  <h3>Change Password</h3>
+	  </div>
       <div class="row">
-        <form action="{{ url_for('password') }}" method="post">
-        <div class="input-field col s10 offset-s1">
-          <input type="password" id="pw" name="pw" class="validate" >
-          <label for="pw">New Password</label>
-        </div>
-        <div class="input-field col s10 offset-s1">
-          <input type="password" id="cpw" name="cpw" class="validate" >
-          <label for="cpw">Confirm Password</label>
-        </div>
-        <button class="btn red darken-1 large waves-effect waves-light col offset-s1" style="margin-top:3%" type="submit" name="action">Submit
-          <i class="mdi-content-send right"></i>
-        </button>
-      </form>
-      </div>
-    </div>
-  </div>
-
+<div class="input-field col s10 offset-s1">
+<input type="text" id="pw" name="pw" class="validate" >
+<label for="pw">New Password</label>
 </div>
-<div id="reset" class="modal">
-  <div class="modal-content">
-    <div class="center">
-      <h3>Reset Account</h3>
-    </div>
-    <div class="row">
-      <div class="input-field col s10 offset-s1">
-        <input type="text" id="pn" name="pn" class="validate" >
-        <label for="pn">Your Phone Number</label>
-      </div>
-      <div class="input-field col s10 offset-s1">
-        <input type="text" id="fn" name="fn" class="validate" >
-        <label for="fn">Friend's Phone Number</label>
-      </div>
-      <div class="input-field col s10 offset-s1">
-        <input type="password" id="pw" name="pw" class="validate" >
-        <label for="pw">Common Password</label>
-      </div>
-      <div class="row">
-        <br>
-        <button class="btn red darken-1 large waves-effect waves-light col offset-s1" style="margin-top:3%" type="submit" name="action">Submit
-          <i class="mdi-content-send right"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-
+<div class="input-field col s10 offset-s1">
+<input type="text" id="cpw" name="cpw" class="validate" >
+<label for="cpw">Confirm Password</label>
 </div>
-
-<script>
-$(document).ready(function(){
-  $('.modal-trigger').leanModal();
-});
+<button class="btn red darken-1 large waves-effect waves-light col offset-s1" style="margin-top:3%" type="submit" name="action">Submit
+    <i class="mdi-content-send right"></i>
+  </button>
+</div>
+      </div>
+    </div>
+   
+  </div>
+    <div id="friends" class="modal">
+    <div class="modal-content">
+      <div class="center">
+	  <h3>Friends</h3>
+	  </div>
+    </div>
+   
+  </div>
+        
+  <script>
+  $(document).ready(function(){
+    $('.modal-trigger').leanModal();
+  });
 </script>
 </body>
 </html>
