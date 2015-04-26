@@ -41,13 +41,23 @@ def teardown_request(exception):
 def landing():
     if session.get('id'):
         return redirect(url_for('homepage'))
+
     return render_template('landing.html')
+
+
+def friends():
+    sel = g.db.execute('select * from friends')
+    entries = [dict(num = row[2]) for row in sel.fetchall()]
+    return entries
 
 @app.route('/home')
 def homepage():
     if not session.get('id'):
         return redirect(url_for('landing'))
-    return render_template('home.html')
+
+    sel = g.db.execute('select * from friends')
+    entries = [dict(num = row[2]) for row in sel.fetchall()]
+    return render_template('home.html', entries=entries)
 
 @app.route('/login', methods = ['GET','POST'])
 def login():
