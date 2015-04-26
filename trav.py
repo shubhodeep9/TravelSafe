@@ -4,6 +4,8 @@ from flask import Flask, request, session, g, redirect, url_for, \
      abort, render_template, flash
 from contextlib import closing
 from werkzeug import secure_filename
+import qrtools
+from datetime import datetime
 
 DATABASE = 'trav.db'
 DEBUG = True
@@ -72,7 +74,7 @@ def upload():
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return render_template('home.html', filename = filename)
+            return redirect(url_for('uploaded', filename = filename))
         else:
             error = "Sorry something wrong happened"
     return error
@@ -105,6 +107,28 @@ def add_friend():
             return redirect(url_for('homepage'))
     return error
 
+@app.route('/uploaded')
+def uploaded():
+    error = None
+    if not session.get('id'):
+        return redirect(url_for('landing'))
+    qr = qrtools.QR()
+
+    if qr.decode(os.path.join(app.config['UPLOAD_FOLDER'], request.args['filename'])):
+        data = qr.data
+        f = data.split(':')
+        f[1] = int(f[1])
+        time = datetime.now()
+        g.db.execute('insert into vehicle (p_num,num_plate,d_id,stamp) values (?,?,?,?)',[session.get('id'),f[0],f[1],time])
+        g.db.commit()
+        return redirect(url_for('homepage'))
+    else:
+        error = 'Error'
+    return error
+
+
+
+
 @app.route('/pass', methods = ['GET', 'POST'])
 def password():
     error = None
@@ -115,7 +139,12 @@ def password():
             return redirect(url_for('homepage'))
         else:
             error = 'Passwords do not match'
-    return error    
+    return error
+
+@app.route('/logout')
+def logout():
+    session.pop('id', None)
+    return redirect(url_for('landing'))
 
 if __name__ == '__main__':
     app.run()
