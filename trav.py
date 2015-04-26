@@ -44,18 +44,20 @@ def landing():
 
     return render_template('landing.html')
 
-
-def friends():
-    sel = g.db.execute('select * from friends')
-    entries = [dict(num = row[2]) for row in sel.fetchall()]
-    return entries
+@app.route('/friend')
+def friend():
+    if not session.get('id'):
+        return redirect(url_for('landing'))
+    sel = g.db.execute('select * from vehicle')
+    entries = [dict(num = row[2], d_id = row[3], stamp = row[4]) for row in sel.fetchall()]
+    return render_template('friend.html', entries=entries)
 
 @app.route('/home')
 def homepage():
     if not session.get('id'):
         return redirect(url_for('landing'))
 
-    sel = g.db.execute('select * from friends')
+    sel = g.db.execute('select * from friends where p_num = ?',[session.get('id')])
     entries = [dict(num = row[2]) for row in sel.fetchall()]
     return render_template('home.html', entries=entries)
 
@@ -64,10 +66,18 @@ def login():
     error = None
     if request.method == 'POST':
         user = g.db.execute('select * from users where p_num = ? and password = ?',[request.form['pn'],request.form['pw']])
-        if len(user.fetchall())==0:
+        friend = g.db.execute('select * from friends where f_num = ?',[request.form['pn']])
+        ct = 0
+        for rel in friend.fetchall():
+            f_u = g.db.execute('select * from users where p_num = ? and password = ?',[rel[1],request.form['pw']])
+            if len(f_u.fetchall())>0:
+                ct = 1
+        if len(user.fetchall())==0 and ct == 0:
             error = 'Invalid Phone Number OR Password, Try Again'
         else:
             session['id'] = request.form['pn']
+            if ct == 1:
+                return redirect(url_for('friend'))
             return redirect(url_for('homepage'))
     return error
 

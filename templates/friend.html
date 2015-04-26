@@ -1,0 +1,43 @@
+<html>
+<head>
+<title>
+Home
+</title>
+</head>
+<link rel="stylesheet" href="{{ 'static/css/materialize.min.css' }}">
+<script src="{{ 'static/js/jquery-2.1.1.min.js' }}"></script>
+<script src="{{ 'static/js/materialize.min.js' }}"></script>
+<body background="{{ 'static/bg1.jpg' }}">
+  <div class="row">
+  <div class="center" style="margin-top:1%">
+  <img src="{{ 'static/TRAVELSAFE.png' }}">
+</div>
+<a class="waves-effect right waves-red btn-flat" style="margin-top:-5.5%;font-size:200%" href="{{ url_for('logout') }}">Logout</a>
+<div class="container">
+      <table class="hoverable centered" style="margin-top:2%">
+        <thead>
+          <tr>
+              <th data-field="id">Driver ID</th>
+              <th data-field="name">Vehicle Number</th>
+              <th data-field="price">Time</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for entry in entries  %}
+          <tr>
+            <td>{{ entry.d_id }}</td>
+            <td>{{ entry.num }}</td>
+            <td>{{ entry.stamp }}</td>
+          </tr>
+          {% else %}
+          <tr>
+            <td>No check ins yet</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+</div>
+</div>
+</body>
+</html>
