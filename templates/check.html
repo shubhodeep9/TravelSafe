@@ -1,0 +1,12 @@
+<html>
+  <head><title>{{ p_num }}</title></head>
+  <body>
+  <table>
+  {% for ch in check %}
+  <tr><td>{{ ch.num }}</td><td>{{ ch.d_id }}</td><td>{{ ch.stamp }}</td></tr>
+  {% else %}
+  <tr><td> No data </td></tr>
+  {% endfor %}
+  </table>
+  </body>
+  </html>

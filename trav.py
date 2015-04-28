@@ -161,6 +161,14 @@ def password():
             error = 'Passwords do not match'
     return error
 
+@app.route('/<p_num>')
+def checkin(p_num):
+    if not session.get('id'):
+        return redirect(url_for('landing'))
+    check = g.db.execute('select * from vehicle where p_num = ?',[p_num])
+    check = [dict(num = row[2], d_id = row[3], stamp = row[4]) for row in check.fetchall()]
+    return render_template('check.html', check = check)
+
 @app.route('/logout')
 def logout():
     session.pop('id', None)
