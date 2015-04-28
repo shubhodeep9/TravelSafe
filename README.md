@@ -5,7 +5,7 @@ An application which can scan government installed qrcodes in public transports 
 It is a small initiation to prevent rape and other casualties.
 <br /><br />
 This web app is completely developed on Python, using the framework 'FLASK'.<br />
-For front-end, Material framework has been used <a href="http://materialize.com">ref.</a>
+For front-end, Material framework has been used <a href="http://materializecss.com">ref.</a>
 
 ## Contributors
 Shubhodeep Mukherjee(Back-End Developer)<br />
