@@ -41,7 +41,6 @@ def teardown_request(exception):
 def landing():
     if session.get('id'):
         return redirect(url_for('homepage'))
-
     return render_template('landing.html')
 
 @app.route('/friend')
@@ -56,7 +55,6 @@ def friend():
 def homepage():
     if not session.get('id'):
         return redirect(url_for('landing'))
-
     sel = g.db.execute('select * from friends where p_num = ?',[session.get('id')])
     entries = [dict(num = row[2]) for row in sel.fetchall()]
     return render_template('home.html', entries=entries)
@@ -133,7 +131,6 @@ def uploaded():
     if not session.get('id'):
         return redirect(url_for('landing'))
     qr = qrtools.QR()
-
     if qr.decode(os.path.join(app.config['UPLOAD_FOLDER'], request.args['filename'])):
         data = qr.data
         f = data.split(':')
@@ -145,9 +142,6 @@ def uploaded():
     else:
         error = 'Error'
     return error
-
-
-
 
 @app.route('/pass', methods = ['GET', 'POST'])
 def password():
