@@ -143,6 +143,7 @@ def uploaded():
         error = 'Error'
     return error
 
+
 @app.route('/pass', methods = ['GET', 'POST'])
 def password():
     error = None
