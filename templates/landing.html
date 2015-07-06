@@ -4,14 +4,14 @@
 Travel Safe
 </title>
 </head>
-<link rel="stylesheet" href="{{ 'static/css/materialize.min.css' }}">
-<script src="{{ 'static/js/jquery-2.1.1.min.js' }}"></script>
-<script src="{{ 'static/js/materialize.min.js' }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename = 'css/materialize.css') }}">
+<script src="{{ url_for('static', filename = 'js/jquery-2.1.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/materialize.min.js') }}"></script>
 <body >
   <section id="landing">
-  <div style="background-image: url({{ 'static/bg1.jpg' }});margin-top:-1%;height:100%">
+  <div style="background-image: url({{ url_for('static', filename = 'bg1.jpg') }});margin-top:-1%;height:100%">
 <div class="center col offset-s2" style="margin-top:1%">
-<img src="{{ 'static/TRAVELSAFE.png' }}">
+<img src="{{ url_for('static', filename = 'TRAVELSAFE.png') }}">
 </div>
 <a class="waves-effect right waves-red btn-flat modal-trigger" style="margin-top:-5%;font-size:200%" href="#modal1">New User</a>
 

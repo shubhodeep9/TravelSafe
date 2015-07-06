@@ -10,7 +10,7 @@ from datetime import datetime
 DATABASE = 'trav.db'
 DEBUG = True
 SECRET_KEY = 'development key'
-UPLOAD_FOLDER = '/home/shubhodeep/TravelSafe/static/'
+UPLOAD_FOLDER = 'static/'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'svg'])
 
 
