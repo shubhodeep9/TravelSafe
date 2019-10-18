@@ -3,7 +3,7 @@ Flask-WTF==0.11
 Jinja2==2.7.3
 PyQRCode==1.1
 WTForms==2.0.2
-Werkzeug==0.10.4
+Werkzeug==0.15.3
 html5lib==0.999
 httplib2==0.8
 pypng==0.0.17
